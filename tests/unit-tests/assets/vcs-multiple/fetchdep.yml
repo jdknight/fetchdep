@@ -1,0 +1,9 @@
+fetchdep:
+  - name: cvs-example
+    site: cvs+:pserver:anonymous@cvs.example.org:/src/prj module-a
+  - name: git-example
+    site: https://example.com/c/example.git
+  - name: hg-example
+    site: hg+https://example.org/repo/example
+  - name: svn-example
+    site: svn+https://svn.example.com/code/

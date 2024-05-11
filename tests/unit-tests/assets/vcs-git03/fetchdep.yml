@@ -1,0 +1,3 @@
+fetchdep:
+  - name: example
+    site: git+https://example.org/repos/sample-prj

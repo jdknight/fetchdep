@@ -1,0 +1,5 @@
+fetchdep:
+  - name: valid
+    site: mkdir
+  - name: missing
+    site: git+

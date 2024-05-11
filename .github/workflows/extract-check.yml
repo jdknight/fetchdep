@@ -1,0 +1,118 @@
+name: Extraction
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+      - '.github/workflows/extract-check.yml'
+      - 'fetchdep/**'
+      - 'tests/**'
+      - 'pyproject.toml'
+      - 'setup.cfg'
+      - 'setup.py'
+      - 'tox.ini'
+  pull_request:
+    branches:
+    - main
+    paths:
+      - '.github/workflows/extract-check.yml'
+      - 'fetchdep/**'
+      - 'tests/**'
+      - 'pyproject.toml'
+      - 'setup.cfg'
+      - 'setup.py'
+      - 'tox.ini'
+  workflow_dispatch:
+
+env:
+  PIP_DISABLE_PIP_VERSION_CHECK: 1
+  PIP_NO_PYTHON_VERSION_WARNING: 1
+
+jobs:
+  build:
+    name: Test (${{ matrix.os }}-${{ matrix.python }})
+    runs-on: ${{ matrix.os }}
+    container:
+      image: ${{ matrix.img }}
+    strategy:
+      matrix:
+        include:
+            # supported interpreters
+            - { os: ubuntu-latest, img:  "python:2.7", python:  "2.7", cache: ~/.cache/pip }
+            - { os: ubuntu-latest, img:  "python:3.5", python:  "3.5", cache: ~/.cache/pip }
+            - { os: ubuntu-latest, img:  "python:3.6", python:  "3.6", cache: ~/.cache/pip }
+            - { os: ubuntu-latest, img:  "python:3.7", python:  "3.7", cache: ~/.cache/pip }
+            - { os: ubuntu-latest, img:  "python:3.8", python:  "3.8", cache: ~/.cache/pip }
+            - { os: ubuntu-latest, img:  "python:3.9", python:  "3.9", cache: ~/.cache/pip }
+            - { os: ubuntu-latest, img: "python:3.10", python: "3.10", cache: ~/.cache/pip }
+            - { os: ubuntu-latest, img: "python:3.11", python: "3.11", cache: ~/.cache/pip }
+            - { os: ubuntu-latest, img: "python:3.12", python: "3.12", cache: ~/.cache/pip }
+
+            # additional operating systems
+            - { os:   macos-latest, python: "3.12", cache: ~/Library/Caches/pip }
+            - { os: windows-latest, python: "3.12", cache: ~\AppData\Local\pip\Cache }
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python }}
+      if: ${{ matrix.img == '' }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python }}
+
+    - name: Cache pip
+      uses: actions/cache@v4
+      id: cache-pip
+      with:
+        path: ${{ matrix.cache }}
+        key: ${{ matrix.os }}-${{ matrix.python }}-pip
+
+    - name: Setup container cache ownership
+      if: ${{ matrix.img != '' }}
+      run: |
+        mkdir -p ~/.cache
+        chown -R $(id -u) ~/.cache
+
+    # dependencies
+    - name: Install dependencies (apt-sync; ubuntu)
+      run: apt-get update
+      if: matrix.os == 'ubuntu-latest'
+    # dependencies
+    - name: Install dependencies
+      run: python -m pip install --upgrade tox
+    # dependencies (cvs)
+    - name: Install dependencies (cvs; macos)
+      run: brew install cvs
+      if: matrix.os == 'macos-latest'
+    - name: Install dependencies (cvs; ubuntu)
+      run: apt-get install cvs --yes
+      if: matrix.os == 'ubuntu-latest'
+    - name: Install dependencies (cvs; windows)
+      run: choco install cvs --version=1.11.22
+      if: matrix.os == 'windows-latest'
+    # dependencies (mercurial)
+    - name: Install dependencies (mercurial; macos)
+      run: brew install mercurial
+      if: matrix.os == 'macos-latest'
+    - name: Install dependencies (mercurial; ubuntu)
+      run: apt-get install mercurial --yes
+      if: matrix.os == 'ubuntu-latest'
+    - name: Install dependencies (mercurial; windows)
+      run: choco install hg
+      if: matrix.os == 'windows-latest'
+    # dependencies (svn)
+    - name: Install dependencies (svn; macos)
+      run: brew install subversion
+      if: matrix.os == 'macos-latest'
+    - name: Install dependencies (svn; ubuntu)
+      run: apt-get install subversion --yes
+      if: matrix.os == 'ubuntu-latest'
+    - name: Install dependencies (svn; windows)
+      run: choco install tortoisesvn
+      if: matrix.os == 'windows-latest'
+
+    - name: Extract tests
+      run: tox -e extract-tests

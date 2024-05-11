@@ -1,0 +1,3 @@
+fetchdep:
+  - name: recursive
+    site: mkdir a:d b:e c:f g

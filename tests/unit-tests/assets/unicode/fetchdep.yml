@@ -1,0 +1,3 @@
+fetchdep:
+  - name: 例
+    site: svn+https://www.example.com

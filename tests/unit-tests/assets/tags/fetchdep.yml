@@ -1,0 +1,17 @@
+fetchdep:
+  - name: example1
+    site: https://example.com/c/example1.git
+  - name: example2
+    site: https://example.com/c/example2.git
+    tags:
+      - tag1
+  - name: example3
+    site: https://example.com/c/example3.git
+    tags:
+      - tag2
+  - name: example4
+    site: https://example.com/c/example4.git
+    tags:
+      - tag1
+      - tag2
+      - tag3

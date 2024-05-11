@@ -1,0 +1,3 @@
+fetchdep:
+  - name: example
+    site: svn+https://svn.example.com/code/

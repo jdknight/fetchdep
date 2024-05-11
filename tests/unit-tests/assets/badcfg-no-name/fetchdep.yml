@@ -1,0 +1,2 @@
+fetchdep:
+  - site: svn+https://svn.example.com/code/

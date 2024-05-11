@@ -1,0 +1,4 @@
+graft tests
+global-exclude *.py[cod]
+global-exclude .gitignore
+global-exclude __pycache__

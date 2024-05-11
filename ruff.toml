@@ -1,0 +1,66 @@
+lint.select = [
+    'ALL',
+]
+
+lint.ignore = [
+    # ignore flake8-annotations since python 2.7 is supported
+    'ANN',
+    # exception chaining not supported in python 2.7
+    'B904',
+    # zip does not have a strict option in python 2.7
+    'B905',
+    # various cases in the code where catching all exceptions is desired
+    'BLE',
+    # we are a bit complex for now
+    'C90',
+    # ignore pydocstyle
+    'D',
+    # flexible file system usage (suppress execute flag check)
+    'EXE002',
+    # imports are sorted lexicographically in this project
+    'FBT002',
+    # imports are sorted lexicographically in this project
+    'I001',
+    # multiple cases of constants
+    'N806',
+    # permit import aliases with case changes
+    'N812',
+    'N813',
+    # ignore errors for python test scripts with dashes in their filenames
+    'N999',
+    # ignore "too many" warnings
+    'PLR0911',
+    'PLR0912',
+    'PLR0913',
+    'PLR0915',
+    # ignore loop variable overrides
+    'PLW2901',
+    # we have some desired usages of global variables
+    'PLW0603',
+    # project uses unittest module
+    'PT',
+    # pathlib not supported in python 2.7
+    'PTH',
+    # single quotes are preferred in this project
+    'Q000',
+    'Q001',
+    # unpacking a collection literal not supported pre-python 3.5
+    'RUF005',
+    # annotated class attributes not supported pre-python 3.5
+    'RUF012',
+    # use of asserts are acceptable for this tool
+    'S101',
+    # flexible subprocess calls per design
+    'S602',
+    'S603',
+    # some formats are preferred for code readability
+    'SIM102',
+    'SIM114',
+    'SIM117',
+    # suppress not supported in python 2.7 is supported
+    'SIM105',
+    # ignore flake8-print since we support/expect printing
+    'T20',
+    # ignore pyupgrade since python 2.7 is supported
+    'UP',
+]

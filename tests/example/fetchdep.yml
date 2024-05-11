@@ -1,0 +1,15 @@
+# Example configuration using real projects.
+
+fetchdep:
+  # cvs
+  - name: libiconv
+    site: :pserver:anonymous@cvs.savannah.gnu.org:/sources/libiconv libiconv
+  # git
+  - name: git
+    site: https://github.com/git/git.git
+  # hg
+  - name: hg-hello
+    site: hg+https://www.mercurial-scm.org/repo/hello
+  # svn
+  - name: docutils
+    site: svn+https://svn.code.sf.net/p/docutils/code/trunk
