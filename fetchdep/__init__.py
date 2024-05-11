@@ -2,4 +2,4 @@
 # SPDX-License-Identifier: BSD-2-Clause
 # Copyright fetchdep
 
-__version__ = '0.0.0.dev0'
+__version__ = '0.0.0'
