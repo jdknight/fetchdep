@@ -50,7 +50,8 @@ class FetchdepEngine:
 
         # find implementation location (mainly for debugging)
         if sys.version_info < (3, 0) and not os.path.isabs(__file__):
-            _, self._base_dir, _ = imp.find_module('fetchdep')
+            _, self._base_dir, _ = imp.find_module(  # pylint: disable=E0606
+                'fetchdep')
         else:
             engine_dir = os.path.dirname(__file__)
             self._base_dir = os.path.dirname(engine_dir)
