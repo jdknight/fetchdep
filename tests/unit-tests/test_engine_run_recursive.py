@@ -54,3 +54,29 @@ class TestEngineRunRecursive(FetchdepTestCase):
 
             entries = engine.cfgdb.entries()
             self.assertEqual(set(entries), set(expected))
+
+    def test_engine_run_recursive_restricted(self):
+        expected = [
+            'recursive-1',
+            'recursive-2',
+            'recursive-3',
+            'recursive-4',
+            'fetchdep-b',
+            'fetchdep-d',
+        ]
+
+        template = 'recursive-restricted'
+        cfg_path = fetch_unittest_assets_dir(template, 'fetchdep.yml')
+        self.assertTrue(os.path.exists(cfg_path))
+
+        config = {
+            'config': cfg_path,
+            'recursive': True,
+        }
+
+        with prepare_testenv(config=config) as engine:
+            rv = engine.run()
+            self.assertTrue(rv)
+
+            entries = engine.cfgdb.entries()
+            self.assertEqual(set(entries), set(expected))

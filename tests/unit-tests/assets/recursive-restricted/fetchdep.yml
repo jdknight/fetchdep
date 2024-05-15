@@ -1,0 +1,11 @@
+fetchdep:
+  - name: recursive-1
+    site: mkdir a
+    recursive: false
+  - name: recursive-2
+    site: mkdir b
+  - name: recursive-3
+    site: mkdir c
+    recursive: false
+  - name: recursive-4
+    site: mkdir d
