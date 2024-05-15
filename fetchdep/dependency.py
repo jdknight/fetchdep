@@ -9,7 +9,7 @@ from fetchdep.exceptions import UnknownVcsTypeConfigurationError
 
 
 class Dependency:
-    def __init__(self, vcs, name, site, origin, tags=None):
+    def __init__(self, vcs, name, site, origin, tags, recursive):
         """
         a project dependency
 
@@ -22,22 +22,25 @@ class Dependency:
             site: the site/source of the dependency
             origin: origin (configuration) of this dependency
             tags (optional): tags assocaited to this dependency
+            recursive: whether if recursive mode is allowed
 
         Attributes:
             name: the name of the dependency
             origin: origin (configuration) of this dependency
+            recursive: whether if recursive mode is allowed
             site: the site/source of the dependency
             tags: tags assocaited to this dependency
             vcs: the vcs type
         """
         self.name = name
         self.origin = origin
+        self.recursive = recursive
         self.site = site
         self.tags = tags.copy() if tags else set()
         self.vcs = vcs
 
 
-def build_dependency(origin, name, site, tags=None):
+def build_dependency(origin, name, site, tags, recursive):
     """
     build a dependency entry
 
@@ -50,6 +53,7 @@ def build_dependency(origin, name, site, tags=None):
         name: the name of the dependency
         site: the site/source of the dependency
         tags (optional): tags assocaited to this dependency
+        recursive: whether if recursive mode is allowed
 
     Returns:
         the built dependency
@@ -95,4 +99,11 @@ def build_dependency(origin, name, site, tags=None):
         raise UnknownVcsTypeConfigurationError(origin, name, site)
 
     # build and return the dependency
-    return Dependency(vcs_type, final_name, final_site, origin, tags=tags)
+    return Dependency(
+        vcs_type,
+        final_name,
+        final_site,
+        origin,
+        tags,
+        recursive,
+    )

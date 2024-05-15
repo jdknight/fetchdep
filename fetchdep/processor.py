@@ -127,7 +127,10 @@ def process(req, opts):
             fetched = req.fetcher(fetch_opts)
 
         if fetched:
-            cfg = find_configuration(req.target_dir)
+            cfg = None
+            if opts.recursive and req.dep.recursive:
+                cfg = find_configuration(req.target_dir)
+
             process_state.complete(cfg)
         else:
             process_state.failed()

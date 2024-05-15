@@ -198,6 +198,7 @@ class FetchdepEngine:
                         new_dep = self.cfgdb.get(name)
                         missing_deps.append(new_dep)  # noqa: B023
 
+                    debug('checking for new dependencies in: {}', new_cfg)
                     if not self._process_configuration(new_cfg, new_hook=hne):
                         trouble = True
 
@@ -252,7 +253,7 @@ class FetchdepEngine:
 
             # if recursive is enabled, check if this new dependency has any
             # fetchdep configuration to add even more dependencies
-            if self.opts.recursive:
+            if self.opts.recursive and dep.recursive:
                 debug('check if package has a fetchdep config: {}', dep.name)
                 expected_dir = os.path.join(self.opts.work_dir, dep.name)
                 if os.path.exists(expected_dir):

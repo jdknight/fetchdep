@@ -11,6 +11,9 @@ CONFIG_BASE_KEY = 'fetchdep'
 # configuration key for a dependency's name
 CONFIG_NAME_KEY = 'name'
 
+# configuration key for recursive flag associated to a dependency
+CONFIG_RECURSIVE_KEY = 'recursive'
+
 # configuration key for tags associated to a dependency
 CONFIG_TAGS_KEY = 'tags'
 

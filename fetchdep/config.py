@@ -4,6 +4,7 @@
 
 from fetchdep.defs import CONFIG_BASE_KEY
 from fetchdep.defs import CONFIG_NAME_KEY
+from fetchdep.defs import CONFIG_RECURSIVE_KEY
 from fetchdep.defs import CONFIG_SITE_KEY
 from fetchdep.defs import CONFIG_TAGS_KEY
 from fetchdep.defs import SUPPORTED_CONFIG_NAMES
@@ -81,6 +82,7 @@ class Config:
             name = entry.get(CONFIG_NAME_KEY)
             site = entry.get(CONFIG_SITE_KEY)
             raw_tags = entry.get(CONFIG_TAGS_KEY)
+            recursive = entry.get(CONFIG_RECURSIVE_KEY, True)
 
             if not name:
                 raise MissingNameConfigurationError(self.path)
@@ -97,7 +99,8 @@ class Config:
                     tag = resolve_tag(raw_tag)
                     tags.add(tag)
 
-            dep = build_dependency(self.path, name, site, tags=tags)
+            dep = build_dependency(self.path, name, site,
+                tags=tags, recursive=recursive)
             deps.append(dep)
 
         return deps
