@@ -1,0 +1,7 @@
+# ignore all in sandbox
+*
+
+# with the exceptions below
+!example/
+!example/fetchdep.yml
+!.gitignore
