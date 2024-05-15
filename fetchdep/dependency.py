@@ -21,7 +21,7 @@ class Dependency:
             name: the name of the dependency
             site: the site/source of the dependency
             origin: origin (configuration) of this dependency
-            tags (optional): tags assocaited to this dependency
+            tags: tags associated to this dependency
             recursive: whether if recursive mode is allowed
 
         Attributes:
@@ -29,7 +29,7 @@ class Dependency:
             origin: origin (configuration) of this dependency
             recursive: whether if recursive mode is allowed
             site: the site/source of the dependency
-            tags: tags assocaited to this dependency
+            tags: tags associated to this dependency
             vcs: the vcs type
         """
         self.name = name
@@ -52,7 +52,7 @@ def build_dependency(origin, name, site, tags, recursive):
         origin: the origin of this dependency
         name: the name of the dependency
         site: the site/source of the dependency
-        tags (optional): tags assocaited to this dependency
+        tags: tags associated to this dependency
         recursive: whether if recursive mode is allowed
 
     Returns:
