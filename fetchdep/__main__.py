@@ -95,7 +95,7 @@ def main():
         except FetchdepError as e:
             err(e)
     except KeyboardInterrupt:
-        print('')
+        print()
 
     return retval
 
