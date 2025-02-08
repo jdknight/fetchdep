@@ -3,6 +3,7 @@
 /.eggs/
 /build/
 /dist/
+/fetchdep-*/
 /pip-wheel-metadata/
 
 # python-specific
