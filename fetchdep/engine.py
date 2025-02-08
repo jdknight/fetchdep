@@ -226,9 +226,16 @@ class FetchdepEngine:
 
         if partial:
             warn('not all dependencies prepared')
-        else:
-            success('all dependencies prepared')
+            return True
 
+        # determine if any dependencies are ignored due to tag selection;
+        # if so, we will notify the user on a first/updated fetchdep event
+        dep_count = len(self.cfgdb.db)
+        detected_deps = len(self.cfgdb.deps)
+        ignored_deps = detected_deps - dep_count
+        pf = '; ignored: {}'.format(ignored_deps) if ignored_deps else ''
+
+        success('all dependencies prepared (total: {}{})', dep_count, pf)
         return True
 
     def _process_configuration(self, conf_point, new_hook=None):
@@ -240,7 +247,8 @@ class FetchdepEngine:
 
         deps = cfg.extract()
         for dep in deps:
-            # keep track of all known tags
+            # keep track of all known dependencies and tags
+            self.cfgdb.track_dependency(dep.name)
             self.cfgdb.track_tags(dep.tags)
 
             # ignore already processed entries
