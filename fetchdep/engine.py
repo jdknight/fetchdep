@@ -21,9 +21,8 @@ from fetchdep.util.log import log
 from fetchdep.util.log import success
 from fetchdep.util.log import verbose
 from fetchdep.util.log import warn
-from multiprocessing import Pool
-from multiprocessing import TimeoutError
 from yaml import __version__ as yaml_version
+import multiprocessing
 import os
 import sys
 
@@ -120,7 +119,7 @@ class FetchdepEngine:
         process_state.log_verbose = is_verbose()
 
         debug('starting worker pool ({})', opts.parallel)
-        worker_pool = Pool(processes=opts.parallel,
+        worker_pool = multiprocessing.Pool(processes=opts.parallel,
             initializer=process_initialization,
             initargs=(process_state,))
 
@@ -172,7 +171,7 @@ class FetchdepEngine:
                     # resulting from the multiprocessing event
                     try:
                         req.get(1)
-                    except TimeoutError:
+                    except multiprocessing.TimeoutError:
                         pass
 
                 # all missing dependencies have been queued; clear

@@ -15,7 +15,7 @@ from fetchdep.util.compat import make_unicode
 from fetchdep.util.log import err
 from fetchdep.util.log import verbose
 from fetchdep.util.tags import resolve_tag
-from io import open
+from io import open  # noqa: A004
 import os
 import yaml
 

@@ -3,6 +3,8 @@ lint.select = [
 ]
 
 lint.ignore = [
+    # ignore shadowed modules
+    'A005',
     # ignore flake8-annotations since python 2.7 is supported
     'ANN',
     # exception chaining not supported in python 2.7
