@@ -1,4 +1,4 @@
-# Development
+# 1.0.0 (2025-02-08)
 
 - Initial/update dependency fetches will report about ignored dependencies
 - State requests will report unused tags
