@@ -130,6 +130,19 @@ class TestEngineRunArgs(FetchdepTestCase):
         with prepare_testenv(config=config) as engine:
             self.assertTrue(engine.opts.dump_state)
 
+    def test_engine_run_args_target_dir(self):
+        with prepare_workdir() as work_dir:
+            target_dir = os.path.join(work_dir, 'example')
+
+            config = {
+                'target': target_dir,
+                'work_dir': None,
+            }
+
+            with prepare_testenv(config=config) as engine:
+                self.assertEqual(engine.opts.target_dir, target_dir)
+                self.assertEqual(engine.opts.work_dir, work_dir)
+
     def test_engine_run_args_verbose(self):
         config = {
             'verbose': True,
