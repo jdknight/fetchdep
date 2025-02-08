@@ -298,6 +298,6 @@ class FetchdepEngine:
                 log('  {}{}', name, state)
                 log('    Site: {}', val.site)
                 log('    Type: {}', val.vcs)
-                log('    Tags: {}', ','.join(val.tags) or '(none)')
+                log('    Tags: {}', ', '.join(sorted(val.tags)) or '(none)')
         else:
             log('No detected dependencies.')
