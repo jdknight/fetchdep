@@ -1,7 +1,7 @@
 # fetchdep
 
 [![pip Version](https://badgen.net/pypi/v/fetchdep?label=PyPI)](https://pypi.python.org/pypi/fetchdep)
-[![Supports Various Python versions](https://badgen.net/static/Python/2.7%20%7C%203.5-3.12)](https://pypi.python.org/pypi/fetchdep)
+[![Supports Various Python versions](https://badgen.net/static/Python/2.7%20%7C%203.5-3.13)](https://pypi.python.org/pypi/fetchdep)
 [![Build Status](https://github.com/jdknight/fetchdep/actions/workflows/build.yml/badge.svg)](https://github.com/jdknight/fetchdep/actions/workflows/build.yml)
 
 ## Overview
