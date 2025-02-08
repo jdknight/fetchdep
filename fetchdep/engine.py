@@ -77,10 +77,9 @@ class FetchdepEngine:
             raise FetchdepMissingConfigurationError(conf_point)
 
         # if no configuration is provided, attempt to load a default one from
-        # the working directory; if none is found, stop successfully
+        # the target directory; if none is found, stop successfully
         if not conf_point:
-            owd = os.getcwd()
-            conf_point = find_configuration(owd)
+            conf_point = find_configuration(opts.target_dir)
 
             if not conf_point:
                 if opts.required:

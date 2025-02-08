@@ -33,6 +33,7 @@ def main():
         parser = argparse.ArgumentParser(
             prog='fetchdep', add_help=False, usage=usage())
 
+        parser.add_argument('target', nargs='?')
         parser.add_argument('--all-tags', action='store_true')
         parser.add_argument('--assume-no', action='store_true')
         parser.add_argument('--assume-yes', '-y', action='store_true')
@@ -132,7 +133,7 @@ def usage():
     Returns:
         the usage string
     """
-    return """fetchdep <options>
+    return """fetchdep <options> [target]
 
  --all-tags                Include all dependencies that have a tag
  --assume-no               Automatically answer no for any question

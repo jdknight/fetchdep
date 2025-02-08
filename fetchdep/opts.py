@@ -29,6 +29,7 @@ class FetchdepEngineOptions:
         required: require that the default configuration exists
         skip_missing: continue even if a dependency cannot be fetched
         tags: desired tags to include
+        target_dir: the context directory for a run
         verbose: whether verbose messages are shown
         work_dir: directory container to clone sources
     """
@@ -45,6 +46,7 @@ class FetchdepEngineOptions:
         self.required = False
         self.skip_missing = False
         self.tags = []
+        self.target_dir = None
         self.verbose = False
         self.work_dir = None
 
@@ -63,6 +65,9 @@ class FetchdepEngineOptions:
         Args:
             args: the arguments
         """
+
+        if args.target:
+            self.target_dir = os.path.abspath(args.target)
 
         if args.work_dir:
             self.work_dir = os.path.abspath(args.work_dir)
@@ -117,14 +122,15 @@ class FetchdepEngineOptions:
         options.
         """
 
-        root_dir = os.getcwd()
+        if not self.target_dir:
+            self.target_dir = os.getcwd()
 
         if not self.work_dir:
-            container_dir = os.path.join(root_dir, os.pardir)
+            container_dir = os.path.join(self.target_dir, os.pardir)
             self.work_dir = os.path.abspath(container_dir)
 
         if self.conf_point and not os.path.isabs(self.conf_point):
-            self.conf_point = os.path.join(root_dir, self.conf_point)
+            self.conf_point = os.path.join(self.target_dir, self.conf_point)
             self.conf_point = os.path.abspath(self.conf_point)
 
         if not self.parallel:
