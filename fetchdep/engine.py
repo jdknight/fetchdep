@@ -105,6 +105,10 @@ class FetchdepEngine:
             if not os.path.exists(target_dir):
                 missing_deps.append(dep)
 
+        unknown_tags = set(self.opts.tags) - self.cfgdb.tags
+        if unknown_tags:
+            warn('unknown tags: {}', ', '.join(sorted(unknown_tags)))
+
         if not missing_deps:
             success('no missing dependencies')
             return True
@@ -236,6 +240,9 @@ class FetchdepEngine:
 
         deps = cfg.extract()
         for dep in deps:
+            # keep track of all known tags
+            self.cfgdb.track_tags(dep.tags)
+
             # ignore already processed entries
             if self.cfgdb.exists(dep.name):
                 debug('ignoring already registered dependency: {}', dep.name)

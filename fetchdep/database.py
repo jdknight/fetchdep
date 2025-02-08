@@ -15,8 +15,10 @@ class ConfigDatabase:
 
         Attributes:
             db: the raw database
+            tags: detected tags
         """
         self.db = OrderedDict()
+        self.tags = set()
 
     def entries(self):
         """
@@ -63,3 +65,12 @@ class ConfigDatabase:
             dependency: the dependency
         """
         self.db[name] = dependency
+
+    def track_tags(self, tags):
+        """
+        track known tags
+
+        Args:
+            tags: the tags
+        """
+        self.tags.update(tags)
