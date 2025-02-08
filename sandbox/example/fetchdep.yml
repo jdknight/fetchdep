@@ -13,3 +13,5 @@ fetchdep:
   # svn
   - name: docutils
     site: svn+https://svn.code.sf.net/p/docutils/code/trunk
+    tags:
+      - example
