@@ -280,6 +280,12 @@ class FetchdepEngine:
         log('Tool: {}', self._base_dir)
         log('Target container: {}', self.opts.work_dir)
 
+        # report any unused tags
+        if not self.opts.all_tags:
+            unused_tags = self.cfgdb.tags - set(self.opts.tags)
+            if unused_tags:
+                log('Unused tags: {}', ', '.join(sorted(unused_tags)))
+
         if self.cfgdb.db:
             log('Detected dependencies:')
             for name, val in self.cfgdb.db.items():
