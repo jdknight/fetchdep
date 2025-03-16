@@ -8,7 +8,7 @@ build-backend = 'setuptools.build_meta'
 name = 'fetchdep'
 description = 'A tool to help fetch sources for a project'
 authors = [
-    {name = 'James Knight', email = 'james.d.knight@live.com'},
+    {name = 'James Knight', email = 'git@jdknight.me'},
 ]
 requires-python = '>=2.7'
 readme = 'README.md'
