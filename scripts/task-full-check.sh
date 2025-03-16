@@ -15,7 +15,6 @@ fi
 primary_envs=(
     ruff
     pylint
-    py37
     py38
     py39
     py310
@@ -24,7 +23,6 @@ primary_envs=(
     py313
     py314
     pypy3
-    py37-extract-tests
     py38-extract-tests
     py39-extract-tests
     py310-extract-tests
@@ -32,7 +30,6 @@ primary_envs=(
     py312-extract-tests
     py313-extract-tests
     py314-extract-tests
-    py37-release
     py38-release
     py39-release
     py310-release
@@ -50,13 +47,16 @@ legacy_envs=(
     py27
     py35
     py36
+    py37
     pypy2
     py27-extract-tests
     py35-extract-tests
     py36-extract-tests
+    py37-extract-tests
     py27-release
     py35-release
     py36-release
+    py37-release
 )
 
 envs=$(IFS=, ; echo "${legacy_envs[*]}")
