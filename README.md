@@ -26,9 +26,11 @@ CVS, Git, Mercurial, SVN.
 
 ## Installation
 
-This tool can be installed using [pip][pip]:
+This tool can be installed using [pip][pip] or [pipx][pipx]:
 
 ```shell
+pipx install fetchdep
+ (or)
 pip install fetchdep
  (or)
 python -m pip install fetchdep
@@ -162,6 +164,7 @@ dependencies will be fetched without invoking a fetch operation.
 [git]: https://git-scm.com/
 [hg]: https://www.mercurial-scm.org/
 [pip]: https://pip.pypa.io/
+[pipx]: https://pipx.pypa.io/
 [python]: https://www.python.org/
 [pyyaml]: https://pyyaml.org/
 [svn]: https://subversion.apache.org/
